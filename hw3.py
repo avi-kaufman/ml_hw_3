@@ -12,35 +12,35 @@ class conditional_independence():
         self.C = {0: 0.5, 1: 0.5}  # P(C=c)
 
         self.X_Y = {
-            (0, 0): 0.25,#P(x=0|y=0)P(y=0)=P(x=0|y=0)0.3
-            (0, 1): 0.25,#P(x=0|y=1)P(y=1)=P(x=0|y=1)0.7
-            (1, 0): 0.25,#P(x=1|y=0)P(y=0)=P(x=1|y=0)0.3
-            (1, 1): 0.25#P(x=1|y=1)P(y=1)=P(x=1|y=1)0.7
+            (0, 0): 0.25,
+            (0, 1): 0.25,
+            (1, 0): 0.25,
+            (1, 1): 0.25
         }  # P(X=x, Y=y) 
 
         self.X_C = {
-            (0, 0): 0.25,#P(x=0|c=0)P(c=0)=P(x=0|c=0)0.5
-            (0, 1): 0.25,#P(x=0|c=1)P(c=1)=P(x=0|c=1)0.5
-            (1, 0): 0.25,#P(x=1|c=0)P(c=0)=P(x=1|c=0)0.5
-            (1, 1): 0.25#P(x=1|c=0)P(c=1)=P(x=1|c=0)0.5
+            (0, 0): 0.25,
+            (0, 1): 0.25,
+            (1, 0): 0.25,
+            (1, 1): 0.25
         }  # P(X=x, C=y)
 
         self.Y_C = {
-            (0, 0): 0.25,#P(y=0|c=0)P(c=0)=P(y=0|c=0)0.5
-            (0, 1): 0.25,#P(y=0|c=1)P(c=1)=P(y=0|c=1)0.5
-            (1, 0): 0.25,#P(y=1|c=0)P(c=0)=P(y=1|c=0)0.5
-            (1, 1): 0.25#P(y=1|c=1)P(c=1)=P(y=1|c=1)0.5
+            (0, 0): 0.25,
+            (0, 1): 0.25,
+            (1, 0): 0.25,
+            (1, 1): 0.25
         }  # P(Y=y, C=c)
 
         self.X_Y_C = {
-            (0, 0, 0): 0.125,#P(x=0,y=0,c=0)=P(x=0,y=0|c=0)P(c=0)=(P(x=0|c=0)P(y=0|c=0))P(c=0)=(P(x=0|c=0)P(y=0|c=0))0.5
-            (0, 0, 1): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=|c=)P(y=|c=))0.5
-            (0, 1, 0): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=|c=)P(y=|c=))0.5
-            (0, 1, 1): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=0|c=1)P(y=1|c=0))0.5
-            (1, 0, 0): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=|c=)P(y=|c=))0.5
-            (1, 0, 1): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=|c=)P(y=|c=))0.5
-            (1, 1, 0): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=|c=)P(y=|c=))0.5
-            (1, 1, 1): 0.125,#P(x=,y=,c=)=P(x=,y=|c=)P(c=)=(P(x=|c=)P(y=|c=))P(c=)=(P(x=|c=)P(y=|c=))0.5
+            (0, 0, 0): 0.125,
+            (0, 0, 1): 0.125,
+            (0, 1, 0): 0.125,
+            (0, 1, 1): 0.125,
+            (1, 0, 0): 0.125,
+            (1, 0, 1): 0.125,
+            (1, 1, 0): 0.125,
+            (1, 1, 1): 0.125,
         }  # P(X=x, Y=y, C=c)
 
     def is_X_Y_dependent(self):
@@ -109,7 +109,7 @@ def possion_iterative_mle(samples, rates):
 
     return: the rate that maximizes the likelihood 
     """
-    likelihoods = get_poisson_log_likelihoods(samples, rates) # might help
+    likelihoods = get_poisson_log_likelihoods(samples, rates) 
     index_of_max_likelihood = np.argmax(likelihoods) 
     return rates[index_of_max_likelihood] 
 
@@ -135,14 +135,7 @@ def normal_pdf(x, mean, std):
  
     Returns the normal distribution pdf according to the given mean and std for the given x.    
     """
-    p = None
-    ###########################################################################
-    # TODO: Implement the function.                                           #
-    ###########################################################################
-    pass
-    ###########################################################################
-    #                             END OF YOUR CODE                            #
-    ###########################################################################
+    p = np.power(math.e, -(((x - mean) ** 2) / (2 * (mean ** 2)))) / math.sqrt(2 * math.pi * (mean ** 2))
     return p
 
 class NaiveNormalClassDistribution():
