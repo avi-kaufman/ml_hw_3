@@ -249,22 +249,22 @@ def compute_accuracy(test_set, map_classifier):
 
 def multi_normal_pdf(x, mean, cov):
     """
-    Calculate multi variable normal desnity function for a given x, mean and covarince matrix.
- 
+    Calculate multi variable normal density function for a given x, mean, and covariance matrix.
+
     Input:
     - x: A value we want to compute the distribution for.
     - mean: The mean vector of the distribution.
     - cov:  The covariance matrix of the distribution.
- 
+
     Returns the normal distribution pdf according to the given mean and var for the given x.    
     """
-    pdf = None
     dim = len(mean)
     x_minus_mean = np.array(x) - np.array(mean)
     cov_inv = np.linalg.inv(cov)
     exp_term = np.exp(-0.5 * np.matmul(x_minus_mean.T, np.matmul(cov_inv, x_minus_mean)))
-    normalization_constant = (((2 * np.pi) ** dim) * np.linalg.det(cov)) ** (-0.5)
+    normalization_constant = (2 * np.pi) ** (-dim / 2) * np.linalg.det(cov) ** (-0.5)
     pdf = normalization_constant * exp_term
+    
     return pdf
 
 class MultiNormalClassDistribution():
@@ -356,8 +356,8 @@ class MaxLikelihood():
         Output
             - 0 if the posterior probability of class 0 is higher and 1 otherwise.
         """
-        posterior_0 = self.class0.self.get_instance_likelihood(x) * self.class0.get_prior()
-        posterior_1 = self.class1.self.get_instance_likelihood(x) * self.class1.get_prior()
+        posterior_0 = self.class0.get_instance_likelihood(x) * self.class0.get_prior()
+        posterior_1 = self.class1.get_instance_likelihood(x) * self.class1.get_prior()
         return 0 if  posterior_0 > posterior_1 else 1
 
 EPSILLON = 1e-6 # if a certain value only occurs in the test set, the probability for that value will be EPSILLON.
